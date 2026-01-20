@@ -1,0 +1,12 @@
+import{a as f,S as d,i as a}from"./assets/vendor-Cq7ZUixy.js";(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const n of t.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&i(n)}).observe(document,{childList:!0,subtree:!0});function s(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function i(e){if(e.ep)return;e.ep=!0;const t=s(e);fetch(e.href,t)}})();const m="https://pixabay.com/api/",g="54229947-cd8105fd48042137517a5f764";function h(o){return f.get(m,{params:{key:g,q:o,image_type:"photo",orientation:"horizontal",safesearch:!0}}).then(r=>r.data)}const l=document.querySelector(".gallery"),c=document.querySelector(".loader"),y=new d(".gallery a",{captionsData:"alt",captionDelay:250});function L(o){const r=o.map(({webformatURL:s,largeImageURL:i,tags:e,likes:t,views:n,comments:u,downloads:p})=>`<li class="gallery-item">
+            <a href="${i}"
+              ><img src="${s}" alt="${e}" loading="lazy"
+            /></a>
+            <ul class="description">
+              <li><p><span class="title-info">Likes</span>${t}</p></li>
+              <li><p><span class="title-info">Views</span>${n}</p></li>
+              <li><p><span class="title-info">Comments</span>${u}</p></li>
+              <li><p><span class="title-info">Downloads</span>${p}</p></li>
+            </ul>
+          </li>`).join("");l.insertAdjacentHTML("beforeend",r),y.refresh()}function S(){l.innerHTML=""}function b(){c.classList.remove("hidden")}function w(){c.classList.add("hidden")}const P=document.querySelector(".form");P.addEventListener("submit",q);function q(o){o.preventDefault();const r=o.target.elements["search-text"].value.trim();if(r===""){a.error({message:"Please fill in the search field",position:"topRight"});return}S(),b(),setTimeout(()=>{h(r).then(s=>{const i=s.hits;if(i.length===0){a.warning({message:"Sorry, there are no images matching your search query. Please try again!",color:"red",position:"topRight"});return}L(i)}).catch(s=>{a.error({message:"Something went wrong. Please try again later",position:"topRight"})}).finally(()=>{w()})},1e3)}
+//# sourceMappingURL=index.js.map
