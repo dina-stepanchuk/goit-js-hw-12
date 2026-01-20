@@ -23,29 +23,26 @@ function onFormSubmit(event) {
   clearGallery();
   showLoader();
 
-  setTimeout(() => {
-    getImagesByQuery(query)
-      .then(data => {
-        const images = data.hits;
-        if (images.length === 0) {
-          iziToast.warning({
-            message:
-              'Sorry, there are no images matching your search query. Please try again!',
-            color: 'red',
-            position: 'topRight',
-          });
-          return;
-        }
-        createGallery(images);
-      })
-      .catch(error => {
+  getImagesByQuery(query)
+    .then(data => {
+      const images = data.hits;
+      if (images.length === 0) {
         iziToast.error({
-          message: 'Something went wrong. Please try again later',
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
           position: 'topRight',
         });
-      })
-      .finally(() => {
-        hideLoader();
+        return;
+      }
+      createGallery(images);
+    })
+    .catch(error => {
+      iziToast.error({
+        message: 'Something went wrong. Please try again later',
+        position: 'topRight',
       });
-  }, 1000);
+    })
+    .finally(() => {
+      hideLoader();
+    });
 }
