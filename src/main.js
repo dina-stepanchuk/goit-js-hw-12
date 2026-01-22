@@ -87,5 +87,5 @@ async function onMoreClick() {
 function smoothScroll() {
   const card = document.querySelector('.gallery-item');
   const cardHeight = card.getBoundingClientRect().height;
-  window.scrollBy({ top: cardHeight * 3, behavior: 'smooth' });
+  window.scrollBy({ top: cardHeight * 2, behavior: 'smooth' });
 }
